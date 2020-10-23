@@ -1,23 +1,46 @@
+
 package com.packt.cardatabase.domain;
 
 import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+@RepositoryRestResource
+public interface CarRepository extends CrudRepository <Car, Long> {
+	// Fetch cars by brand
+	List<Car> findByBrand(@Param("brand") String brand);
+
+	// Fetch cars by color
+	List<Car> findByColor(@Param("color") String color);
+}
+
+
+
+/*import java.util.List;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 //Crud Repository interface is used for CRUD operations in entity class
-/*CarRepository now extends the Srping Boot JPA CrudRepository interface
+CarRepository now extends the Srping Boot JPA CrudRepository interface
  * <Car, Long> type arguements define that this repsoitory for the car entity class and the type of the ID
- * field is Long*/
+ * field is Long
 
 //Spring Data JPA provides PagingAndSortingRepository which extends CrudRepository.
-/*public interface CarRepository extends PagingAndSortingRepository,Car, Long> {
+public interface CarRepository extends PagingAndSortingRepository,Car, Long> {
 	
-} see page 49*/
+} see page 49
+@RepositoryRestResource 
+//^^this is added to include queries in the service
+//Query parameters are annotated with the @Param annotation
 public interface CarRepository extends CrudRepository <Car, Long> {
 	//Fetch cars by brand
-	List<Car> findByBrand(String brand);
+	List<Car> findByBrand(@Param("brand") String brand);
 	//Fetch cars by color
-	List<Car> findByColor(String color);
+	List<Car> findByColor(@Param("color") String color);
 	//Fetch cars by year
 	List<Car> findByYear(int year);
 	//There can be multiple fields after the By keyword, concatenated with the And or Or keywords
@@ -34,5 +57,5 @@ public interface CarRepository extends CrudRepository <Car, Long> {
 	//fetch cars by brand using SQL 
 	@Query("select c from Car c where c.brand like %?1")
 		List<Car> findByBrandEndsWith(String brand);
-	
-}
+	}*/
+
