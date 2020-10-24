@@ -1,7 +1,7 @@
 package com.packt.cardatabase.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+//unrecognized field not marked as ignorable
 //@JsonIgnoreProperties(ignoreUnknown = true)
 public class AccountCredentials {
 	private String username;

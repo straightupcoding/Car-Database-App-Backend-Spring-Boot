@@ -8,10 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Car {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@JsonIgnoreProperties(ignoreUnknown = true)
 	private long id;
 	private String brand, model, color, registerNumber;
 	private int year, price;
