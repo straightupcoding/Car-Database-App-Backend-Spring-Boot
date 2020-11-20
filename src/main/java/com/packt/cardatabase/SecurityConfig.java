@@ -27,17 +27,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserDetailServiceImpl userDetailsService; 
 
 	  @Override
+	  // this allows all requests to be permitted.
 	  protected void configure(HttpSecurity http) throws Exception {
-		 http.csrf().disable().cors().and().authorizeRequests()
-		  .antMatchers(HttpMethod.POST, "/login").permitAll()
-	        .anyRequest().authenticated()
-	        .and()
-	        // Filter for the api/login requests
-	        .addFilterBefore(new LoginFilter("/login", authenticationManager()),
-	                UsernamePasswordAuthenticationFilter.class)
-	        // Filter for other requests to check JWT in header
-	        .addFilterBefore(new AuthenticationFilter(),
-	                UsernamePasswordAuthenticationFilter.class);
+		  http.csrf().disable().cors().and().authorizeRequests().anyRequest().permitAll();
+
+		 
+			/* This was used to force the user authentication to reveal api
+			 * http.csrf().disable().cors().and().authorizeRequests()
+			 * .antMatchers(HttpMethod.POST, "/login").permitAll()
+			 * .anyRequest().authenticated() .and() // Filter for the api/login requests
+			 * .addFilterBefore(new LoginFilter("/login", authenticationManager()),
+			 * UsernamePasswordAuthenticationFilter.class) // Filter for other requests to
+			 * check JWT in header .addFilterBefore(new AuthenticationFilter(),
+			 * UsernamePasswordAuthenticationFilter.class);
+			 */
 	  }
   
 	  @Bean
